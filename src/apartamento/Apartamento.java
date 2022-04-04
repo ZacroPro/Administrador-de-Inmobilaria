@@ -5,8 +5,13 @@ package apartamento;
 public class Apartamento {
 
     public static void main(String[] args) {
-        System.out.println("Hola mundo");
-        System.out.println("valores nuevos");
+      
+    } 
+    public static void registroCliente(){
+        
+    }
+    public static void registroFactura(){
+        
     }
     
 }
