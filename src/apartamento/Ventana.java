@@ -22,6 +22,7 @@ public class Ventana extends javax.swing.JFrame {
         box1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(33, 195, 195));
@@ -66,14 +67,14 @@ public class Ventana extends javax.swing.JFrame {
         txtValor.setBounds(180, 150, 90, 21);
 
         box1.setFont(new java.awt.Font("Sitka Small", 0, 11)); // NOI18N
-        box1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "150 Millones - Pequeño", "180 Millones - Mediano", "200 Millones - Grande" }));
+        box1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "150000000", "180000000", "200000000" }));
         box1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 box1ActionPerformed(evt);
             }
         });
         getContentPane().add(box1);
-        box1.setBounds(470, 150, 170, 20);
+        box1.setBounds(470, 150, 120, 20);
 
         jButton1.setFont(new java.awt.Font("Sitka Small", 0, 11)); // NOI18N
         jButton1.setText("Comprar");
@@ -90,6 +91,10 @@ public class Ventana extends javax.swing.JFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(320, 150, 150, 15);
 
+        jButton2.setText("Registro");
+        getContentPane().add(jButton2);
+        jButton2.setBounds(400, 280, 80, 30);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -102,12 +107,13 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_txtValorActionPerformed
 
     private void box1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box1ActionPerformed
-      SeleccionarApto();
-    
+         
     }//GEN-LAST:event_box1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      Apto();
+     SeleccionarAPTO();
+     //RegistroPers();
+  // valorPagar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -148,6 +154,7 @@ public class Ventana extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> box1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -157,28 +164,27 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 
-public void SeleccionarApto(){
+
     
- Apartamentos val = new Apartamentos();
+ public void SeleccionarAPTO(){
+    Apartamentos val = new Apartamentos();
  
-    String Valor1 = "150 Millones - Pequeño";
-    String Valor2 = "180 Millones - Mediano";
-    String Valor3 ="200 Millones - Grande";
     String item =  box1.getSelectedItem().toString();
+    val.precio = Integer.parseInt(item);
+     Factura fac = new Factura();
+    fac.obtenerValorPagado(Integer.parseInt(txtValor.getText()));  
+    double saldo = fac.saldo(val.precio,fac.getValorPagado());
+     JOptionPane.showMessageDialog(this,saldo, "Saldo", JOptionPane.INFORMATION_MESSAGE);
+   // JOptionPane.showMessageDialog(this,val.precio, "Atención", JOptionPane.INFORMATION_MESSAGE);
+   
+}public void RegistroPers(){
     
-    if (item.equals(Valor1)){
-         val.precio = 150000000;
-    }
-     if (item.equals(Valor2)){
-         val.precio = 180000000;    
-     }
-     else{
-         val.precio = 200000000;
-     }
-    System.out.println("");
-}public void Apto(){
-    int item = box1.getSelectedItem().hashCode();
-          JOptionPane.showMessageDialog(this,item, "Atención", JOptionPane.INFORMATION_MESSAGE);
+    Cliente cli = new Cliente();
+    
+   cli.nombreCompleto = txtNombre.getText();
+   cli.noIdentificacion = Integer.parseInt(txtNoidentificacion.getText());
+   JOptionPane.showMessageDialog(this,cli.nombreCompleto + " No." +cli.noIdentificacion, "Atención", JOptionPane.INFORMATION_MESSAGE);
+    
 }
 }
 

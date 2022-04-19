@@ -4,19 +4,22 @@ package apartamento;
 
 public class Factura {
     
-    public double valorPagado;
+    private double valorPagado;
     public Apartamentos apto;
     public Cliente cliente; 
-    public double saldo;
+    
+
+ public void obtenerValorPagado(double valorPagado) {
+        this.valorPagado = valorPagado;
+ }
+
+    public double getValorPagado() {
+        return valorPagado;
+    }
   
  
-public static double saldo(){
-    
- Apartamentos apto = new Apartamentos();
-   
-return 0;
-     
-        
-
+public double saldo(double x ,double y){
+ double saldo =  x -  y;
+     return saldo;
 }
 }
