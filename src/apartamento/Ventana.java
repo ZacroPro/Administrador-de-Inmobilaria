@@ -1,12 +1,18 @@
 
 package apartamento;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Map;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import logica.GestorRegistro;
 
 public class Ventana extends javax.swing.JFrame {
 
     public Ventana() {
         initComponents();
+      
     }
 
     @SuppressWarnings("unchecked")
@@ -23,30 +29,23 @@ public class Ventana extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaFactura = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(33, 195, 195));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Sitka Small", 0, 11)); // NOI18N
         jLabel1.setText("Nombre y Apellido :");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(50, 80, 120, 15);
 
         jLabel2.setFont(new java.awt.Font("Sitka Small", 0, 11)); // NOI18N
         jLabel2.setText("Valor a Consignar :");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(60, 150, 110, 15);
 
         jLabel3.setFont(new java.awt.Font("Sitka Small", 0, 11)); // NOI18N
         jLabel3.setText("No . Identificacion :");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(340, 80, 120, 15);
 
         txtNoidentificacion.setFont(new java.awt.Font("Sitka Small", 0, 11)); // NOI18N
-        getContentPane().add(txtNoidentificacion);
-        txtNoidentificacion.setBounds(470, 80, 110, 21);
 
         txtNombre.setFont(new java.awt.Font("Sitka Small", 0, 11)); // NOI18N
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -54,8 +53,6 @@ public class Ventana extends javax.swing.JFrame {
                 txtNombreActionPerformed(evt);
             }
         });
-        getContentPane().add(txtNombre);
-        txtNombre.setBounds(180, 80, 90, 21);
 
         txtValor.setFont(new java.awt.Font("Sitka Small", 0, 11)); // NOI18N
         txtValor.addActionListener(new java.awt.event.ActionListener() {
@@ -63,8 +60,6 @@ public class Ventana extends javax.swing.JFrame {
                 txtValorActionPerformed(evt);
             }
         });
-        getContentPane().add(txtValor);
-        txtValor.setBounds(180, 150, 90, 21);
 
         box1.setFont(new java.awt.Font("Sitka Small", 0, 11)); // NOI18N
         box1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "150000000", "180000000", "200000000" }));
@@ -73,8 +68,6 @@ public class Ventana extends javax.swing.JFrame {
                 box1ActionPerformed(evt);
             }
         });
-        getContentPane().add(box1);
-        box1.setBounds(470, 150, 120, 20);
 
         jButton1.setFont(new java.awt.Font("Sitka Small", 0, 11)); // NOI18N
         jButton1.setText("Comprar");
@@ -83,17 +76,97 @@ public class Ventana extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(500, 280, 80, 30);
 
         jLabel4.setFont(new java.awt.Font("Sitka Small", 0, 11)); // NOI18N
         jLabel4.setText("Apartamento - Tamaño.");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(320, 150, 150, 15);
 
-        jButton2.setText("Registro");
-        getContentPane().add(jButton2);
-        jButton2.setBounds(400, 280, 80, 30);
+        jButton2.setText("Salir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        tablaFactura.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaFactura);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(txtNoidentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(box1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel1))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(txtNoidentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(box1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(59, 59, 59)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(52, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -112,9 +185,14 @@ public class Ventana extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
      SeleccionarAPTO();
-     //RegistroPers();
-  // valorPagar();
+    // RegistroPers();
+    // valorPagar();
+     this.crearFactura();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       System.exit(0);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,6 +237,8 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tablaFactura;
     private javax.swing.JTextField txtNoidentificacion;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtValor;
@@ -168,24 +248,82 @@ public class Ventana extends javax.swing.JFrame {
     
  public void SeleccionarAPTO(){
     Apartamentos val = new Apartamentos();
- 
+  String nombre = txtNombre.getText();
+        String identificacion = txtNoidentificacion.getText();
+        int valorPagado = Integer.parseInt(txtValor.getText());
     String item =  box1.getSelectedItem().toString();
     val.precio = Integer.parseInt(item);
+    
      Factura fac = new Factura();
     fac.obtenerValorPagado(Integer.parseInt(txtValor.getText()));  
-    double saldo = fac.saldo(val.precio,fac.getValorPagado());
-     JOptionPane.showMessageDialog(this,saldo, "Saldo", JOptionPane.INFORMATION_MESSAGE);
+    int saldo = fac.saldo(val.precio,fac.obtenerValorPagado());
+     JOptionPane.showMessageDialog(this,"Usuario"+ nombre+" de No, Identificascion "+ identificacion + " de saldo " + saldo +"\n Compra exitosa !!!", "Saldo", JOptionPane.INFORMATION_MESSAGE);
    // JOptionPane.showMessageDialog(this,val.precio, "Atención", JOptionPane.INFORMATION_MESSAGE);
    
 }public void RegistroPers(){
     
     Cliente cli = new Cliente();
     
-   cli.nombreCompleto = txtNombre.getText();
-   cli.noIdentificacion = Integer.parseInt(txtNoidentificacion.getText());
-   JOptionPane.showMessageDialog(this,cli.nombreCompleto + " No." +cli.noIdentificacion, "Atención", JOptionPane.INFORMATION_MESSAGE);
+    String nombre = txtNombre.getText();
+        int noIdentificacion = Integer.parseInt(txtNoidentificacion.getText());
+  
+   
+       
+   
+   JOptionPane.showMessageDialog(this,nombre + " No." +noIdentificacion, "Atención", JOptionPane.INFORMATION_MESSAGE);
     
 }
-}
+   private void crearFactura(){
+        
+        String nombre = txtNombre.getText();
+        String identificacion = txtNoidentificacion.getText();
+        int valorPagado = Integer.parseInt(txtValor.getText());
+        Apartamentos val = new Apartamentos();
+ 
+        String item =  box1.getSelectedItem().toString();
+        val.precio = Integer.parseInt(item);
+    
+    Factura fac = new Factura();
+    
+         fac.obtenerValorPagado(Integer.parseInt(txtValor.getText()));  
+         int saldo = fac.saldo(val.precio,fac.obtenerValorPagado());
+        
+        
+        GestorRegistro g = new GestorRegistro();
+        Factura c = g.crearRegistro(nombre, identificacion, valorPagado, saldo);
+        if (c != null){
+            this.cargarFactura();
+            JOptionPane.showMessageDialog(this, "Se a Facturado la compra --->"+c);
+            
+        }else{
+            JOptionPane.showMessageDialog(this, "No se Facturo la compra , porfavor confirmar la iaformacion");
+        }
+   }
+        private void cargarFactura() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        
+        modelo.addColumn("CODIGO");
+        modelo.addColumn("NOMBRE COMPLETO");
+        modelo.addColumn("NO.IDENTIFICATION");
+        modelo.addColumn("SALDO");
+       
+        GestorRegistro gestor = new GestorRegistro();
+        Map<String, Factura> lista = gestor.obtenerLista();
+        for (Map.Entry<String, Factura> dato  : lista.entrySet()) {
+            Factura lafactura = dato.getValue();
+            Object[] datos = {
+                lafactura .valCodigo(),
+                lafactura .obtenerCliente().obtenerNombreCompleto(),
+                lafactura .obtenerCliente().obtenerNoIdentificacion(),
+                lafactura.obtenerSaldo()
+            };
+            modelo.addRow(datos);
+            
+        }
+        this.tablaFactura.setModel(modelo);
+    }
+    }
+
+
 
 
