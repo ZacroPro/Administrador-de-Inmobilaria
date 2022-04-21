@@ -3,7 +3,17 @@ package apartamento;
 
 
 public class Apartamento {
+    
+  
+   public int precio; 
 
-    public static void main(String[] args) {
+    public Apartamento() {
     }
-}
+
+    public Apartamento(int precio) {
+        this.precio = precio;
+    }
+   
+  }
+    
+

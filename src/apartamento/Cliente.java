@@ -7,14 +7,10 @@ public class Cliente {
     private String  noIdentificacion;
    
 
-    public Cliente(String nombreCompleto, String noIdentificacion, Apartamentos apto) {
+    public Cliente(String nombreCompleto, String noIdentificacion) {
         this.nombreCompleto = nombreCompleto;
         this.noIdentificacion = noIdentificacion;
   
-    }
-
-    public Cliente() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     public String obtenerNombreCompleto() {
         return nombreCompleto;

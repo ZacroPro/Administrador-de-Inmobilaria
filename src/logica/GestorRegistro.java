@@ -31,7 +31,7 @@ public class GestorRegistro {
         if (nombreCompleto == null || noIdentificacion == null ||  noIdentificacion.isEmpty()){
             return null;
         }else{
-            Cliente cliente = this.crearPaciente(nombreCompleto, noIdentificacion);
+            Cliente cliente = this.crearCliente(nombreCompleto, noIdentificacion);
             Factura c = new Factura(valorPagado, cliente, saldo, nombreCompleto);
            
             listaFactura.put(c.valCodigo(),c);
@@ -41,10 +41,9 @@ public class GestorRegistro {
         
         
     }
-    private Cliente crearPaciente(String nombreCompleto, String noIdentificacion){
-       Cliente c = new Cliente();
-        c.modNombreCompleto(nombreCompleto);
-        c.modNoIdentificacion(noIdentificacion);
+    private Cliente crearCliente(String nombreCompleto, String noIdentificacion){
+       Cliente c = new Cliente(nombreCompleto, noIdentificacion);
+       
         
         return c;
     }
