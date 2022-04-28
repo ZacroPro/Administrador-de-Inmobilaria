@@ -1,5 +1,5 @@
 
-package apartamento;
+package datos;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -9,8 +9,11 @@ import javax.swing.table.DefaultTableModel;
 import logica.GestorRegistro;
 
 public class Ventana extends javax.swing.JFrame {
-
+    
+   public static int saldo = 200000000;
+   
     public Ventana() {
+        
         initComponents();
       
     }
@@ -297,20 +300,19 @@ public class Ventana extends javax.swing.JFrame {
 
 
     
- public void SeleccionarAPTO(){
-    Apartamento val = new Apartamento();
+  public void SeleccionarAPTO(){
+    Apartamento apart = new Apartamento();
     String nombre = txtNombre.getText();
     String identificacion = txtNoidentificacion.getText();
-    int valorPagado = Integer.parseInt(txtValor.getText());
     String item =  box1.getSelectedItem().toString();
-    val.precio = Integer.parseInt(item);
+    int valorPagado = Integer.parseInt(item);
+    apart.setPrecio(valorPagado);
     
      Factura fac = new Factura();
      if(valorPagado == 150000000 || valorPagado == 180000000 || valorPagado == 200000000){
-    fac.obtenerValorPagado(Integer.parseInt(txtValor.getText()));  
-    int saldo = fac.saldo(val.precio,fac.obtenerValorPagado());
-     JOptionPane.showMessageDialog(this,"Usuario"+ nombre+" de No, Identificascion "+ identificacion , "REGISTRO", JOptionPane.INFORMATION_MESSAGE);
-   // JOptionPane.showMessageDialog(this,val.precio, "Atención", JOptionPane.INFORMATION_MESSAGE);
+	    fac.definirValorPagado(valorPagado);  
+	    int saldo = fac.calcularSaldo(apart.getPrecio(),fac.obtenerValorPagado());
+	     JOptionPane.showMessageDialog(this,"Usuario"+ nombre+" de No, Identificascion "+ identificacion , "REGISTRO", JOptionPane.INFORMATION_MESSAGE);  
      }else{
           JOptionPane.showMessageDialog(this,"Verificar Datos."  , "Advertencia", JOptionPane.INFORMATION_MESSAGE);
      }
@@ -357,12 +359,12 @@ public class Ventana extends javax.swing.JFrame {
         Apartamento val = new Apartamento();
     
         String item =  box1.getSelectedItem().toString();
-        val.precio = Integer.parseInt(item);
+        val.setPrecio(Integer.parseInt(item)); 
     
     Factura fac = new Factura();
     
-         fac.obtenerValorPagado(Integer.parseInt(txtValor.getText()));  
-         int saldo = fac.saldo(val.precio,fac.obtenerValorPagado());
+         fac.definirValorPagado(Integer.parseInt(txtValor.getText()));  
+         int saldo = fac.calcularSaldo(val.getPrecio(),fac.obtenerValorPagado());
         
         
         GestorRegistro g = new GestorRegistro();

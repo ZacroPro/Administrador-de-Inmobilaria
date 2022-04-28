@@ -1,5 +1,5 @@
 
-package apartamento;
+package datos;
 
 import java.io.Serializable;
 
@@ -25,11 +25,11 @@ public class Factura implements Serializable {
 
    
 
-    public int obtenerValorPagado() {
+     public int obtenerValorPagado() {
         return valorPagado;
     }
 
-    public void obtenerValorPagado(int valorPagado) {
+    public void definirValorPagado(int valorPagado) {
         this.valorPagado = valorPagado;
     }
     
@@ -58,8 +58,14 @@ public class Factura implements Serializable {
     }
 
 
-  public int saldo(int x ,int y){
-     int saldo =  x -  y;
+  public int calcularSaldo(int precio ,int valorPagado){
+     int saldo =  precio -  valorPagado;
+     if(saldo < 0) {
+    	int  saldop1 = saldo ; 
+     }else
+          System.out.println("Verificar valor a pagar");
         return saldo;
+  }
 }
-}
+
+ 

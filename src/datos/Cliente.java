@@ -1,5 +1,5 @@
 
-package apartamento;
+package datos;
 
 public class Cliente {
     

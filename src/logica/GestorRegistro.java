@@ -5,8 +5,8 @@
 package logica;
 
 import Utilidades.GestorPermanencia;
-import apartamento.Cliente;
-import apartamento.Factura;
+import datos.Cliente;
+import datos.Factura;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
